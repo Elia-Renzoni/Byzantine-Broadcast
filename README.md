@@ -1,2 +1,2 @@
 # Byzantine-Broadcast
-A Fail-Byzantine Broadcast Algorithm Implemented in Node.js
+A Fail-Byzantine Broadcast Algorithm Implemented in Python
