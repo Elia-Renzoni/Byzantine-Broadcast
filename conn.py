@@ -15,10 +15,11 @@ class Request:
         return self.request_id
 
 class Response:
-    def __init__(self, status, content, checksum):
+    def __init__(self, status, content, checksum, writer):
         self.execution_status = status
         self.response_content = content
         self.checksum = checksum
+        self.writer = writer
 
     def get_response_status(self):
         return self.execution_status
@@ -28,5 +29,8 @@ class Response:
 
     def get_response_checksum(self):
         return self.checksum
+
+    def get_writer(self):
+        return self.writer
 
 
