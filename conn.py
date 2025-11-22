@@ -33,4 +33,10 @@ class Response:
     def get_writer(self):
         return self.writer
 
+    def write(self):
+        pass
 
+
+class Conn: 
+    def __init__(self):
+        pass
