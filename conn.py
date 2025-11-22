@@ -14,29 +14,17 @@ class Request:
     def get_request_id(self):
         return self.request_id
 
-class Response:
-    def __init__(self, status, content, checksum, writer):
-        self.execution_status = status
-        self.response_content = content
-        self.checksum = checksum
-        self.writer = writer
-
-    def get_response_status(self):
-        return self.execution_status
-
-    def get_response_content(self):
-        return self.response_content
-
-    def get_response_checksum(self):
-        return self.checksum
-
-    def get_writer(self):
-        return self.writer
-
-    def write(self):
-        pass
-
-
 class Conn: 
-    def __init__(self):
-        pass
+    def __init__(self, net_interface, address, port):
+        self.net = net_interface
+        self.address = address
+        self.port = port
+
+    def get_interface(self):
+        return self.net
+
+    def get_address(self):
+        return self.address
+
+    def get_port(self):
+        return self.port
