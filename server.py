@@ -29,11 +29,15 @@ def handle_request(connection):
     data = connection.get_interface().recv(2048)
     parsed = json.load(data)
     req = conn.Request(parsed['body'], parsed['checksum'], parsed['id'])
-    result = handlers.request_strainer(req)
+    result, msg = handlers.request_strainer(conn.Request(
+        parsed['body'],
+        parsed['checksum'],
+        parsed['id'],
+    ))
     if result is True:
-        ack("", connection.get_interface())
+        ack(msg, connection.get_interface())
     else:
-        nack("", connection.get_interface())
+        nack(msg, connection.get_interface())
     delete_conn(connection)
 
 def graceful_shutdown():
