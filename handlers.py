@@ -14,13 +14,13 @@ def request_strainer(req):
         case "/join":
             result, message = handle_node_join(req)
         case "/msg":
-            pass
+            result, message = handle_client_message(req)
         case "/propose":
             pass
         case "/health":
-            pass
+            result, message = handle_health_check(req)
         case "/replication":
-            pass
+            result, message = handle_replication_message(req)
         case _:
             pass
 
