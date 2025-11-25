@@ -23,7 +23,15 @@ def request_strainer(req):
     return result, message
 
 def handle_client_message(req):
-    pass
+    data = req['body']
+    # to something with the data received.
+
+    # byzantine broadcast the message receivde to all nodes
+    peers = pgroup.fetch_membership_list()
+    for peer in peers:
+        pass
+        
+    
 
 def handle_replication_message(req):
     pass

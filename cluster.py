@@ -32,7 +32,13 @@ class Cluster:
             self.mutex.release()
 
     def fetch_membership_list(self):
-        return self.membership_list
+        try:
+            self.mutex.acquire()
+            return self.membership_list
+        except:
+            pass
+        finally:
+            self.mutex.release()
 
 class Node:
     def __init__(self, name, address):
