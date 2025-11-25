@@ -73,10 +73,24 @@ def delete_conn(connection):
         conn_mutex.release()
 
 def ack(msg, connection):
-    pass
+    writer = connection.get_interface()
+    response = {
+            status: 200,
+            body: msg,
+            checksum: 0,
+    }
+    writer.send(json.dump(response))
+    writer.close()
 
 def nack(msg, connection):
-    pass
+    writer = connection.get_interface()
+    response = {
+            status: 500,
+            body: msg,
+            checksum: 0,
+    }
+    writer.send(json.dump(response))
+    writer.close()
 
 if __name__ == "__main__":
     start_server()
