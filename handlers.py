@@ -44,9 +44,6 @@ def handle_client_message(req):
 def handle_replication_message(req):
     pass
 
-def handle_health_check(req):
-    pass
-
 def handle_node_join(req):
     status, message = check_emptyness(req)
     if status is True:
