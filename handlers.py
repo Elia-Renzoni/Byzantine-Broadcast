@@ -15,10 +15,6 @@ def request_strainer(req):
             result, message = handle_node_join(req)
         case "/msg":
             result, message = handle_client_message(req)
-        case "/propose":
-            pass
-        case "/health":
-            result, message = handle_health_check(req)
         case "/replication":
             result, message = handle_replication_message(req)
         case _:
