@@ -1,11 +1,12 @@
 import conn as cn
 import cluster as group
+import byzantine_broadcast as bb
 
 pgroup = group.Cluster()
 
 # match the handler based on req id
 def request_strainer(req):
-    corruption_status = compute_checksum(req['checksum'])
+    corruption_status = bb.perform_checksum(req['checksum'])
     if corruption_status is True:
         return False, "error detected while performing checksum"
 
@@ -23,13 +24,16 @@ def request_strainer(req):
     return result, message
 
 def handle_client_message(req):
-    data = req['body']
-    # to something with the data received.
+    status, message = check_emptyness(req)
+    if status is True:
+        return status, message
 
     # byzantine broadcast the message receivde to all nodes
     peers = pgroup.fetch_membership_list()
     for peer in peers:
-        pass
+        result = bb.send_to(peer, data)
+        if result is True:
+            pass
         
     
 
@@ -40,12 +44,15 @@ def handle_health_check(req):
     pass
 
 def handle_node_join(req):
-    if req['body'] is None:
-        return False, "empty data"
-    
+    status, message = check_emptyness(req)
+    if status is True:
+        return status, message
+   
     if pgroup.add_node(req['body']) is True:
         return True, "join completed"
     return False, "join aborted"
 
-def compute_checksum(checksum):
-    pass
+def check_emptyness(req):
+    if req['body'] is None:
+        return True, "empty data"
+    return False, ""
