@@ -24,6 +24,7 @@ def request_strainer(req):
     return result, message
 
 def handle_client_message(req):
+    check = bb.ByzantineFault()
     status, message = check_emptyness(req)
     if status is True:
         return status, message
@@ -33,9 +34,12 @@ def handle_client_message(req):
     for peer in peers:
         result = bb.send_to(peer, data)
         if result is True:
-            pass
-        
-    
+            check.add_ack()
+
+    if check.is_byzantine_quorum_reached() is True:
+        return True, "Byzantine Qurorum Reached"
+
+    return False, "Byzantine Quorum Not Reached"
 
 def handle_replication_message(req):
     pass
