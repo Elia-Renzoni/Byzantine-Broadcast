@@ -49,11 +49,11 @@ def handle_node_join(req):
     if status is True:
         return status, message
    
-    if pgroup.add_node(req['body']) is True:
+    if pgroup.add_node(req.get_request_content()) is True:
         return True, "join completed"
     return False, "join aborted"
 
 def check_emptyness(req):
-    if req['body'] is None:
+    if req.get_request_content() is None:
         return True, "empty data"
     return False, ""
