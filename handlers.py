@@ -37,11 +37,11 @@ def handle_client_message(req):
             check.add_ack()
 
     if check.is_byzantine_quorum_reached() is True:
-        return True, "Byzantine Qurorum Reached"
+        return True, "Byzantine Quorum Reached"
 
     return False, "Byzantine Quorum Not Reached"
 
-def handle_replication_message(req):
+def handle_replication_message(reqQuorum):
     pass
 
 def handle_node_join(req):
