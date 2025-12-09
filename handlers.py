@@ -32,7 +32,7 @@ def handle_client_message(req):
     # byzantine broadcast the message receivde to all nodes
     peers = pgroup.fetch_membership_list()
     for peer in peers:
-        result = bb.send_to(peer, data)
+        result = bb.send_to(peer, req['body'])
         if result is True:
             check.add_ack()
 
