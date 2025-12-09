@@ -41,6 +41,7 @@ def handle_client_message(req):
 
     return False, "Byzantine Quorum Not Reached"
 
+# handler for managing the relayed client request
 def handle_replication_message(reqQuorum):
     pass
 
