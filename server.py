@@ -75,9 +75,9 @@ def delete_conn(connection):
 def ack(msg, connection):
     writer = connection.get_interface()
     response = {
-            status: 200,
-            body: msg,
-            checksum: 0,
+            "status": 200,
+            "body": msg,
+            "checksum": 0,
     }
     writer.send(json.dump(response))
     writer.close()
@@ -85,9 +85,9 @@ def ack(msg, connection):
 def nack(msg, connection):
     writer = connection.get_interface()
     response = {
-            status: 500,
-            body: msg,
-            checksum: 0,
+            "status": 500,
+            "body": msg,
+            "checksum": 0,
     }
     writer.send(json.dump(response))
     writer.close()
