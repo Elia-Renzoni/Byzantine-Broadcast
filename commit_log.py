@@ -8,7 +8,7 @@ class CommitLog:
     def insert(self, log_message):
         try:
             self.lock.acquire()
-            self.log.push(log_message)
+            self.log.append(log_message)
         except:
             pass
         finally:

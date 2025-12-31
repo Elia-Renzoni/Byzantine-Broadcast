@@ -17,7 +17,7 @@ def send_to(peer_address, message):
 
     net.send(message)
     data = net.recv(2048)
-    return perform_checksum(json.load(data))
+    return json.load(data)
 
 def collect_ack():
     pass
@@ -25,5 +25,5 @@ def collect_ack():
 def calculate_byzantine_quorum():
     pass
 
-def perform_checksum():
+def perform_checksum(checksum):
     pass

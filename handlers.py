@@ -43,7 +43,7 @@ def handle_client_message(req):
 
 # handler for managing the relayed client request
 def handle_replication_message(reqQuorum):
-    pass
+    return 
 
 def handle_node_join(req):
     status, message = check_emptyness(req)
