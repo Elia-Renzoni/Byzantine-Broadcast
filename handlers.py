@@ -6,7 +6,10 @@ pgroup = group.Cluster()
 
 # match the handler based on req id
 def request_strainer(req):
-    corruption_status = bb.perform_checksum(req['checksum'])
+    corruption_status = bb.check_hash(
+            req.get_request_hash(),
+            req.get_request_content()
+    )
     if corruption_status is True:
         return False, "error detected while performing checksum"
 
@@ -27,7 +30,7 @@ def request_strainer(req):
 # broadcast them to the entire cluster. The task
 # is aborted when the byzantine quorum is not reached
 def handle_client_message(req):
-    check = bb.ByzantineFault()
+    check = bb.ByzantineFault(pgroup.get_cluster_len())
     status, message = check_emptyness(req)
     if status is True:
         return status, message
@@ -35,7 +38,7 @@ def handle_client_message(req):
     # byzantine broadcast the message receivde to all nodes
     peers = pgroup.fetch_membership_list()
     for peer in peers:
-        result = bb.send_to(peer, req['body'])
+        result = bb.send_to(peer, req.get_request_content())
         if result is True:
             check.add_ack()
 

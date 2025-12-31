@@ -4,16 +4,16 @@ class Request:
     Request represent a TCP request sent from the client or peers
     in the cluster.
     '''
-    def __init__(self, content, checksum, request_id):
+    def __init__(self, content, integrity_hash, request_id):
         self.request_content = content
-        self.request_checksum = checksum
+        self.request_hash = integrity_hash
         self.request_id = request_id
 
     def get_request_content(self):
         return self.request_content
 
-    def get_request_checksum(self):
-        return self.request_checksum
+    def get_request_hash(self):
+        return self.request_hash
 
     def get_request_id(self):
         return self.request_id

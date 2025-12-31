@@ -28,10 +28,9 @@ def handle_request(connection):
 
     data = connection.get_interface().recv(2048)
     parsed = json.load(data)
-    req = conn.Request(parsed['body'], parsed['checksum'], parsed['id'])
     result, msg = handlers.request_strainer(conn.Request(
         parsed['body'],
-        parsed['checksum'],
+        parsed['hash'],
         parsed['id'],
     ))
     if result is True:

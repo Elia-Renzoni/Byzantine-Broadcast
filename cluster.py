@@ -40,6 +40,15 @@ class Cluster:
         finally:
             self.mutex.release()
 
+    def get_cluster_len(self):
+        try:
+            self.mutex.acquire()
+            return len(self.membership_list)
+        except:
+            pass
+        finally:
+            self.mutex.release()
+
 class Node:
     def __init__(self, name, address):
         self.name = name
