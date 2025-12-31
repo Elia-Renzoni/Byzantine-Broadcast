@@ -9,7 +9,8 @@ class ByzantineFault:
         self.acks += 1
 
     def is_byzantine_quorum_reached(self):
-        pass
+        return (self.acks + 3) / 2
+        
 
 def send_to(peer_address, message):
     net = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -18,12 +19,6 @@ def send_to(peer_address, message):
     net.send(message)
     data = net.recv(2048)
     return json.load(data)
-
-def collect_ack():
-    pass
-
-def calculate_byzantine_quorum():
-    pass
 
 def perform_checksum(checksum):
     pass
