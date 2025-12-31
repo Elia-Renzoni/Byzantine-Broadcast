@@ -1,5 +1,9 @@
 
 class Request:
+    '''
+    Request represent a TCP request sent from the client or peers
+    in the cluster.
+    '''
     def __init__(self, content, checksum, request_id):
         self.request_content = content
         self.request_checksum = checksum
@@ -15,6 +19,9 @@ class Request:
         return self.request_id
 
 class Conn: 
+    '''
+    Conn contains a TCP connection established with the replica.
+    '''
     def __init__(self, net_interface, address, port):
         self.net = net_interface
         self.address = address

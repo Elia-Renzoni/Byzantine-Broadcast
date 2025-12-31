@@ -23,6 +23,9 @@ def request_strainer(req):
 
     return result, message
 
+# this function takes the client requests and
+# broadcast them to the entire cluster. The task
+# is aborted when the byzantine quorum is not reached
 def handle_client_message(req):
     check = bb.ByzantineFault()
     status, message = check_emptyness(req)
@@ -42,9 +45,14 @@ def handle_client_message(req):
     return False, "Byzantine Quorum Not Reached"
 
 # handler for managing the relayed client request
-def handle_replication_message(reqQuorum):
-    return 
+def handle_replication_message(req):
+    message = req.get_request_content()
+    print(req.get_request_content())
+    
+    return True, "task completed"
 
+# this function takes the join request from the
+# peers and update the cluster configs
 def handle_node_join(req):
     status, message = check_emptyness(req)
     if status is True:
