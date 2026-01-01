@@ -4,6 +4,7 @@ import threading
 import json
 import handlers
 import sys
+import json
 
 net = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 conns = list()
@@ -79,7 +80,8 @@ def ack(msg, connection):
             "body": msg,
             "checksum": 0,
     }
-    writer.send(json.dump(response))
+
+    writer.send(json.dumps(response))
     writer.close()
 
 def nack(msg, connection):
@@ -89,7 +91,8 @@ def nack(msg, connection):
             "body": msg,
             "checksum": 0,
     }
-    writer.send(json.dump(response))
+    
+    writer.send(json.dumps(response))
     writer.close()
 
 if __name__ == "__main__":
