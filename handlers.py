@@ -35,7 +35,7 @@ def handle_client_message(req):
     if status is True:
         return status, message
 
-    # byzantine broadcast the message receivde to all nodes
+    # byzantine broadcast the message received to all nodes
     peers = pgroup.fetch_membership_list()
     for peer in peers:
         result = bb.send_to(peer, req.get_request_content())
