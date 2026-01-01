@@ -3,6 +3,7 @@ import conn
 import threading
 import json
 import handlers
+import sys
 
 net = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 conns = list()
@@ -92,4 +93,4 @@ def nack(msg, connection):
     writer.close()
 
 if __name__ == "__main__":
-    start_server()
+    start_server(sys.argv[0], sys.argv[1])
