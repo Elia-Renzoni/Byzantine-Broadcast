@@ -18,7 +18,7 @@ def send_to(peer_address, message):
 
     net.send(message)
     data = net.recv(2048)
-    return json.load(data)
+    return json.loads(data)
 
 def check_hash(hash_value, to_hash):
    return hash(to_hash) == hash_value
