@@ -30,7 +30,10 @@ def request_strainer(req):
 # broadcast them to the entire cluster. The task
 # is aborted when the byzantine quorum is not reached
 def handle_client_message(req):
-    check = bb.ByzantineFault(pgroup.get_cluster_len())
+    check = bb.ByzantineFault(
+            pgroup.get_cluster_len(),
+            req.get_request_hash()
+    )
     status, message = check_emptyness(req)
     if status is True:
         return status, message
@@ -39,7 +42,7 @@ def handle_client_message(req):
     peers = pgroup.fetch_membership_list()
     for peer in peers:
         result = bb.send_to(peer, req.get_request_content())
-        if result is True:
+        if result is not None and check.check_hash(result['hash']):
             check.add_ack()
 
     if check.is_byzantine_quorum_reached() is True:
