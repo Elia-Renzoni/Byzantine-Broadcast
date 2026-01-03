@@ -6,13 +6,6 @@ pgroup = group.Cluster()
 
 # match the handler based on req id
 def request_strainer(req):
-    corruption_status = bb.check_hash(
-            req.get_request_hash(),
-            req.get_request_content()
-    )
-    if corruption_status is True:
-        return False, "error detected while performing checksum"
-
     result, message = None, None
     match req.get_request_id():
         case "/join":
