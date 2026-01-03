@@ -29,7 +29,7 @@ def handle_request(connection):
         return
 
     data = connection.get_interface().recv(2048)
-    parsed = json.load(data)
+    parsed = json.loads(data)
     result, msg = handlers.request_strainer(conn.Request(
         parsed['body'],
         parsed['hash'],
